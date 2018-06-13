@@ -9,7 +9,7 @@ public class GreenNews {
     private String mUrl;
     private String mSection;
 
-    public GreenNews (String thumbnail, String newsTitle, String author, String dateNtime, String url, String section) {
+    public GreenNews(String thumbnail, String newsTitle, String author, String dateNtime, String url, String section) {
 
         mThumbnail = thumbnail;
         mNewsTitle = newsTitle;
@@ -19,24 +19,30 @@ public class GreenNews {
         mSection = section;
     }
 
-        public String getThumbnail() {
-        return mThumbnail; }
+    public String getThumbnail() {
+        return mThumbnail;
+    }
 
-        public String getNewsTitle () {
-        return mNewsTitle; }
+    public String getNewsTitle() {
+        return mNewsTitle;
+    }
 
-        public String getAuthor () {
-        return mAuthor; }
+    public String getAuthor() {
+        return mAuthor;
+    }
 
-        public String getDateNtime () {
-        return mDateAndTime; }
 
-        public String getUrl () {
-        return mUrl; }
+    public String getDateNtime() {
+        return mDateAndTime;
+    }
 
-        public String getSection () {
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public String getSection() {
         return mSection;
-        }
-        }
+    }
+}
 
 

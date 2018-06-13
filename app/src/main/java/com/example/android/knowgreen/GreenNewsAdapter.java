@@ -25,6 +25,21 @@ public class GreenNewsAdapter extends ArrayAdapter<GreenNews> {
         mContext = context;
     }
 
+    private static String dateFormatter(String dateString) {
+        Date date = null;
+        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'");
+
+        try {
+            date = dateFormater.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        dateFormater = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
+
+        return dateFormater.format(date);
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -52,8 +67,9 @@ public class GreenNewsAdapter extends ArrayAdapter<GreenNews> {
         newsTitle.setText(currentGreenNews.getNewsTitle());
 
         TextView newsAuthor = (TextView) listItemView.findViewById(R.id.news_author);
-        if (currentGreenNews.getAuthor() != null){
-        newsAuthor.setText(currentGreenNews.getAuthor());}
+        if (currentGreenNews.getAuthor() != null) {
+            newsAuthor.setText(currentGreenNews.getAuthor());
+        }
 
 
         TextView dateNtime = listItemView.findViewById(R.id.date_time);
@@ -65,24 +81,8 @@ public class GreenNewsAdapter extends ArrayAdapter<GreenNews> {
         section.setText(currentGreenNews.getSection());
 
 
-
-  return listItemView;
+        return listItemView;
     }
-
-        private static String dateFormatter(String dateString) {
-            Date date = null;
-            SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'");
-
-            try {
-                date = dateFormater.parse(dateString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            dateFormater = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
-
-            return dateFormater.format(date);
-        }
 
 
 }

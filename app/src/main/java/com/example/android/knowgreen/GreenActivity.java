@@ -21,19 +21,19 @@ import java.util.List;
 public class GreenActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<GreenNews>> {
 
     private static final String GUARDIAN_ENVIRONMENT_REQUEST = "https://content.guardianapis.com/search?show-fields=thumbnail&show-tags=contributor&section=environment&order-by=newest&api-key=490ad52e-b745-4b3e-bfa8-09448aff76c6";
-    private GreenNewsAdapter mGreenAdapter;
     private static final String LOG_TAG = GreenNewsLoader.class.getName();
-    private TextView mEmptyText;
     private static final int GREEN_NEWS_LOADER = 1;
+    private GreenNewsAdapter mGreenAdapter;
+    private TextView mEmptyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_green);
 
-        ListView greenNewsListView= (ListView) findViewById(R.id.list);
-        mEmptyText = (TextView)(findViewById(R.id.empty_list));
-        greenNewsListView.setEmptyView (mEmptyText);
+        ListView greenNewsListView = (ListView) findViewById(R.id.list);
+        mEmptyText = (TextView) (findViewById(R.id.empty_list));
+        greenNewsListView.setEmptyView(mEmptyText);
 
         // Create a new adapter that takes an empty list of greenNews as input
         mGreenAdapter = new GreenNewsAdapter(this, new ArrayList<GreenNews>());
@@ -74,8 +74,7 @@ public class GreenActivity extends AppCompatActivity implements LoaderManager.Lo
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(GREEN_NEWS_LOADER, null, this);
-        }
-        else {
+        } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
             View loadingIndicator = findViewById(R.id.progress);
@@ -86,7 +85,6 @@ public class GreenActivity extends AppCompatActivity implements LoaderManager.Lo
             mEmptyText.setText(getString(R.string.no_connection));
         }
     }
-
 
 
     @Override

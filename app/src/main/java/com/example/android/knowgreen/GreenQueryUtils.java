@@ -22,6 +22,9 @@ public class GreenQueryUtils {
 
     public static final String LOG_TAG = GreenActivity.class.getName();
 
+    private GreenQueryUtils() {
+    }
+
     /**
      * Returns new URL object from the given string URL.
      */
@@ -126,34 +129,34 @@ public class GreenQueryUtils {
             // key called "results"
 
 
-                JSONArray resultsArray = greenObject.getJSONArray("results");
+            JSONArray resultsArray = greenObject.getJSONArray("results");
 
-                for (int i = 0; i < resultsArray.length(); i++) {
+            for (int i = 0; i < resultsArray.length(); i++) {
 
-                    // Get a single earthquake at position i within the list of earthquakes
-                    JSONObject currentGreenNews = resultsArray.getJSONObject(i);
+                // Get a single earthquake at position i within the list of earthquakes
+                JSONObject currentGreenNews = resultsArray.getJSONObject(i);
 
-                    String webTitle = currentGreenNews.getString("webTitle");
-                    String webDate = currentGreenNews.getString("webPublicationDate");
-                    String webUrl = currentGreenNews.getString("webUrl");
-                    String section = currentGreenNews.getString("sectionName");
-                    JSONObject fields = currentGreenNews.getJSONObject("fields");
-                    String thumbnailImg = fields.getString("thumbnail");
+                String webTitle = currentGreenNews.getString("webTitle");
+                String webDate = currentGreenNews.getString("webPublicationDate");
+                String webUrl = currentGreenNews.getString("webUrl");
+                String section = currentGreenNews.getString("sectionName");
+                JSONObject fields = currentGreenNews.getJSONObject("fields");
+                String thumbnailImg = fields.getString("thumbnail");
 
-                    JSONArray tagsArray = currentGreenNews.getJSONArray("tags");
+                JSONArray tagsArray = currentGreenNews.getJSONArray("tags");
 
-                    for (int a = 0; a < tagsArray.length(); a++) {
-                        JSONObject tags = tagsArray.getJSONObject(a);
-                        String author = tags.getString("webTitle");
+                for (int a = 0; a < tagsArray.length(); a++) {
+                    JSONObject tags = tagsArray.getJSONObject(a);
+                    String author = tags.getString("webTitle");
 
 
-                        // Create a new {@link GreenNews} object with the thumbnail, title, date, url and section from the JSON response.
-                        GreenNews green = new GreenNews(thumbnailImg, webTitle, author, webDate, webUrl, section);
+                    // Create a new {@link GreenNews} object with the thumbnail, title, date, url and section from the JSON response.
+                    GreenNews green = new GreenNews(thumbnailImg, webTitle, author, webDate, webUrl, section);
 
-                        // Add the new {@link GreenNews} to the list of greenNews.
-                        greenNews.add(green);
-                    }
+                    // Add the new {@link GreenNews} to the list of greenNews.
+                    greenNews.add(green);
                 }
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -166,13 +169,10 @@ public class GreenQueryUtils {
         return greenNews;
     }
 
-    private GreenQueryUtils() {
-    }
-
     /**
      * Query the Guardian dataset and return a list of {@link GreenNews} objects.
      */
-    public static List<GreenNews> fetchNewsData (String requestUrl){
+    public static List<GreenNews> fetchNewsData(String requestUrl) {
 
         // Create URL object
         URL url = createUrl(requestUrl);

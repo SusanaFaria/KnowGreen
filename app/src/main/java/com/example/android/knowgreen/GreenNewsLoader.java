@@ -5,19 +5,20 @@ import android.content.Context;
 
 import java.util.List;
 
-public class GreenNewsLoader extends AsyncTaskLoader <List<GreenNews>>{
-
-    /** Tag for log messages */
+public class GreenNewsLoader extends AsyncTaskLoader<List<GreenNews>> {
+    /**
+     * Tag for log messages
+     */
     private static final String LOG_TAG = GreenNewsLoader.class.getName();
-
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String mUrl;
-
     /**
      * Constructs a new {@link GreenNewsLoader}.
      *
      * @param context of the activity
-     * @param url to load data from
+     * @param url     to load data from
      */
     public GreenNewsLoader(Context context, String url) {
         super(context);
