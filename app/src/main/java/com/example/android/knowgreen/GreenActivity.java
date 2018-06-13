@@ -35,7 +35,7 @@ public class GreenActivity extends AppCompatActivity implements LoaderManager.Lo
         mEmptyText = (TextView)(findViewById(R.id.empty_list));
         greenNewsListView.setEmptyView (mEmptyText);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
+        // Create a new adapter that takes an empty list of greenNews as input
         mGreenAdapter = new GreenNewsAdapter(this, new ArrayList<GreenNews>());
 
         // Set the adapter on the {@link ListView}
@@ -43,17 +43,17 @@ public class GreenActivity extends AppCompatActivity implements LoaderManager.Lo
         greenNewsListView.setAdapter(mGreenAdapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected earthquake.
+        // to open a website with more information about the selected news.
         greenNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current earthquake that was clicked on
+                // Find the current news that was clicked on
                 GreenNews currentGreenNews = mGreenAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri greenNewsUri = Uri.parse(currentGreenNews.getUrl());
 
-                // Create a new intent to view the earthquake URI
+                // Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, greenNewsUri);
 
                 // Send the intent to launch a new activity
@@ -99,10 +99,10 @@ public class GreenActivity extends AppCompatActivity implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<List<GreenNews>> loader, List<GreenNews> greenNews) {
         mEmptyText.setText(getString(R.string.no_data));
-        // Clear the adapter of previous earthquake data
+        // Clear the adapter of previous data
         mGreenAdapter.clear();
 
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+        // If there is a valid list of news, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (greenNews != null && !greenNews.isEmpty()) {
             mGreenAdapter.addAll(greenNews);

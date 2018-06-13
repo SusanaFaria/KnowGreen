@@ -107,7 +107,7 @@ public class GreenQueryUtils {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding earthquakes to
+        // Create an empty ArrayList that we can start adding newss to
         List<GreenNews> greenNews = new ArrayList<>();
 
         // Try to parse the JSON response string. If there's a problem with the way the JSON
@@ -118,19 +118,16 @@ public class GreenQueryUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(greenNewsJSON);
 
-            // Extract the JSONObject associated with the key called "features",
-            // which represents a list of features (or earthquakes).
+            // Extract the JSONObject associated with the key called "response"
             JSONObject greenObject = baseJsonResponse.getJSONObject("response");
 
 
-                // For a given earthquake, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that earthquake.
+            // For a given news, extract the JSONArray associated with the
+            // key called "results"
 
 
                 JSONArray resultsArray = greenObject.getJSONArray("results");
 
-                // For each earthquake in the earthquakeArray, create an {@link Earthquake} object
                 for (int i = 0; i < resultsArray.length(); i++) {
 
                     // Get a single earthquake at position i within the list of earthquakes
@@ -150,11 +147,10 @@ public class GreenQueryUtils {
                         String author = tags.getString("webTitle");
 
 
-                        // Create a new {@link Earthquake} object with the magnitude, location, time,
-                        // and url from the JSON response.
+                        // Create a new {@link GreenNews} object with the thumbnail, title, date, url and section from the JSON response.
                         GreenNews green = new GreenNews(thumbnailImg, webTitle, author, webDate, webUrl, section);
 
-                        // Add the new {@link Earthquake} to the list of earthquakes.
+                        // Add the new {@link GreenNews} to the list of greenNews.
                         greenNews.add(green);
                     }
                 }
@@ -166,7 +162,7 @@ public class GreenQueryUtils {
             Log.e("QueryUtils", "Problem parsing  results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list of greenNews
         return greenNews;
     }
 
@@ -174,7 +170,7 @@ public class GreenQueryUtils {
     }
 
     /**
-     * Query the USGS dataset and return a list of {@link GreenNews} objects.
+     * Query the Guardian dataset and return a list of {@link GreenNews} objects.
      */
     public static List<GreenNews> fetchNewsData (String requestUrl){
 
@@ -189,10 +185,10 @@ public class GreenQueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
+        // Extract relevant fields from the JSON response and create a list of {@link GreenNews}
         List<GreenNews> greenNews = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of {@link Earthquake}s
+        // Return the list of {@link GreenNews}s
         return greenNews;
     }
 }
